@@ -1,11 +1,13 @@
 
 import React, { useEffect, useState } from 'react';
 import './item-details.css';
-import SwapiService from '../../services/swapi-service';
+
 
 
 const Record = ({label, label_key, data}) => {
+   console.log('>>>>', data );
   return(
+   
     <li className="list-group-item">
               <span className="term">{label}</span>
               <span>{data[label_key]}</span>
@@ -16,17 +18,21 @@ const Record = ({label, label_key, data}) => {
 }
 
 
-const ItemDetails = ({itemId, children, getImage}) => {
-  const [state, SetState] = useState({data: []})
-  const swapi = new SwapiService()
-  const {id, name, eyeColor, birthYear, gender} = state.data;
+  const ItemDetails = ({itemId, children, getData, getImage}) => {
+  const [state, setState] = useState({data: {}})
 
+
+
+     useEffect(() => {
+      getData(itemId)
+      .then(data => {
+      setState({data: data})
+      })
+    },[itemId])
+
+     const {id, name, eyeColor, birthYear, gender} = state.data;
      const itemImage = getImage({id})
 
-  useEffect(() => {
-    getImage()
- 
-  }, )
 
     return (
       <div className="person-details card">

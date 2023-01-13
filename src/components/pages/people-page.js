@@ -11,7 +11,10 @@ import withSwapi from '../hoc';
 const leftElementMethods = (swapi) => ({getData: swapi.getAllPlanets})
 const NewItemList = withSwapi(ItemList, leftElementMethods)
 
-const rightElementMethods = (swapi) => ({getImage: swapi.getPlanetImage})
+const rightElementMethods = (swapi) => ({
+  getData: swapi.getPlanet, 
+  getImage: swapi.getPlanetImage
+})
 const NewItemDetails = withSwapi(ItemDetails, rightElementMethods)
     
 const PeoplePage = () => {
